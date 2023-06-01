@@ -36,14 +36,7 @@ class Author(models.Model):
     def update_rating(self):
         posts_rating = Post.objects.filter(author=self).aggregate(Sum('rating'))['rating__sum']
         comments_rating = Comment.objects.filter(user=self.user).aggregate(Sum('rating'))['rating__sum']
-
-        posts_comments = [Comment.objects.filter(post=i) for i in [j for j in Post.objects.filter(author=self)]]
-        if len(posts_comments) > 1:
-            posts_comments = [j for i in posts_comments for j in i]
-        else:
-            posts_comments = posts_comments[0]
-        posts_comments_rating = sum(i.rating for i in posts_comments)
-
+        posts_comments_rating = Comment.objects.filter(post__author=self).aggregate(Sum('rating'))['rating__sum']
         self.user_rating = (posts_rating*3) + comments_rating + posts_comments_rating
         self.save()
 
