@@ -1,2 +1,2 @@
 # Django project "NewsPortal"
-Test project
+Big Django Project
