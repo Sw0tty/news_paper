@@ -1,0 +1,50 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+News
+{% endblock title %}
+
+{% block content %}
+
+<style>
+td {
+    border: 1px solid;
+    padding: 10px;
+}
+
+table {
+	width: 100%;
+}
+
+.table-head {
+    background-color: lightgray;
+    height: 50px;
+}
+
+.date-time-collumn {
+	width: 15%;
+}
+</style>
+
+<h1>Все доступные новости</h1>
+<hr>
+<h3>Сейчас на портале {{ news|length }} новости</h3>
+{% if news %}
+	<table>
+		<tr class="table-head">
+			<td>Заголовок</td>
+			<td class="date-time-collumn">Дата публикации</td>
+			<td>Содержание</td>
+		</tr>
+		{% for i in news %}
+		<tr>
+			<td>{{ i.name }}</td>
+			<td>{{ i.datetime_in|date:'d.m.Y' }}</td>
+			<td>{{ i.content|truncatewords:20 }}</td>
+		</tr>
+		{% endfor %}
+	</table>
+{% else %}
+	<h2>Новостей нет!</h2>
+{% endif %}
+{% endblock content %}

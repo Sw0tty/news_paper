@@ -1,0 +1,43 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+Fresh new
+{% endblock title %}
+
+{% block content %}
+
+<style>
+td {
+    border: 1px solid;
+    padding: 10px;
+}
+
+table {
+	width: 100%;
+}
+
+.table-head {
+    background-color: lightgray;
+    height: 50px;
+}
+
+.date-time-collumn {
+	width: 15%;
+}
+</style>
+
+<h1>Одна из новостей</h1>
+<hr>
+<table>
+		<tr class="table-head">
+			<td>Заголовок</td>
+			<td class="date-time-collumn">Дата публикации</td>
+			<td>Содержание</td>
+		</tr>
+		<tr>
+			<td>{{ new.name }}</td>
+			<td>{{ new.datetime_in|date:'d.m.Y' }}</td>
+			<td>{{ new.content }}</td>
+		</tr>
+</table>
+{% endblock content %}

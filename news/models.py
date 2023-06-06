@@ -1,3 +1,5 @@
+import random
+
 from django.db import models
 from news.resources import TYPE_OF_NEW
 from django.contrib.auth.models import User
@@ -27,6 +29,9 @@ class Post(models.Model):
 
     def preview(self):
         return f"{self.content[:124]}..."
+
+    def __str__(self):
+        return f"{self.name}: {self.preview()}"
 
 
 class Author(models.Model):
