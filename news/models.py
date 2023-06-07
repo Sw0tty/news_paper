@@ -1,5 +1,4 @@
 import random
-
 from django.db import models
 from news.resources import TYPE_OF_NEW
 from django.contrib.auth.models import User

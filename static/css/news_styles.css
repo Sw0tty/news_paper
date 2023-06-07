@@ -1,0 +1,17 @@
+td {
+    border: 1px solid;
+    padding: 10px;
+}
+
+table {
+	width: 100%;
+}
+
+.table-head {
+    background-color: lightgray;
+    height: 50px;
+}
+
+.date-time-collumn {
+	width: 15%;
+}
