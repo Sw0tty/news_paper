@@ -10,11 +10,10 @@
 <link rel="stylesheet" type='text/css' href="{% static 'css/home-styles.css' %}">
 <h1>Добро пожаловать на новостной портал!</h1>
 <hr>
-<p class="pages-con">На данный момент доступны две страницы:</p>
-<ul>
+<p class="pages">На данный момент доступны две страницы:</p>
+<ol>
     <li>News - все новости</li>
     <li>Random new - случайная новость</li>
-</ul>
-{{ flatpage.content }}
+</ol>
 
 {% endblock content %}
