@@ -1,19 +1,50 @@
 {% extends 'flatpages/default.html' %}
+{% load static %}
 
 {% block title %}
-News
+{% if 'news' in request.path %}
+New create
+{% elif 'articles' in request.path %}
+Article create
+{% endif %}
 {% endblock title %}
 
 
 {% block content %}
+<link rel="stylesheet" type='text/css' href="{% static 'css/edit-styles.css' %}">
 
-<h1>Создание</h1>
+
+{% if 'edit' in request.path and object.type == 'NE' %}
+    <h1>Редактирование новости</h1>
+{% elif 'edit' in request.path and object.type == 'AR' %}
+    <h1>Редактирование статьи</h1>
+{% elif 'create' in request.path and 'news' in request.path %}
+    <h1>Создание новости</h1>
+{% elif 'create' in request.path and 'articles' in request.path %}
+    <h1>Создание статьи</h1>
+{% endif %}
+
 <hr>
-<form action="" method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <input type="submit" value="Save">
-</form>
-<a href="/news/{{ object.id }}/delete"><input type="submit" value="Delete"></a>
+<section>
+    <form action="" method="post" onsubmit="enablePath();">
+        {% csrf_token %}
+        {% for i in form %}
+            <div class="filter-block">
+                <p class="label">{{ i.label }}</p>
+                <hr>
+                <p class="filter-field">{{ i }}</p>
+            </div>
+            {% endfor %}
+        <input type="submit" value="Опубликовать">
+    </form>
+</section>
+
+{% if 'edit' in request.path %}
+    <div class="danger-zone">
+        <h2>Danger Zone!</h2>
+        <hr>
+        <a href="/news/14/delete"><input type="submit" value="Удалить пост"></a>
+    </div>
+{% endif %}
 
 {% endblock content %}

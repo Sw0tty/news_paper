@@ -5,7 +5,7 @@ h1 {
 }
 
 body {
-  background: url("/static/assets/news.jpg") no-repeat;
+  background: url("/static/assets/news.jpg") no-repeat fixed;
   background-size: cover;
 }
 
@@ -21,11 +21,13 @@ ol {
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     padding: 15px;
+    padding-top: 30px;
     border-right: 1px solid;
     border-bottom: 1px solid;
     border-left: 1px solid;
     margin-left: -10%;
     margin-right: -10%;
+    margin-top: -30px
 }
 
 .cube {

@@ -21,20 +21,12 @@ class PostSearch(ListView):
     ordering = '-datetime_in'
 
     def get_queryset(self):
-        # Получаем обычный запрос
         queryset = super().get_queryset()
-        # Используем наш класс фильтрации.
-        # self.request.GET содержит объект QueryDict, который мы рассматривали
-        # в этом юните ранее.
-        # Сохраняем нашу фильтрацию в объекте класса,
-        # чтобы потом добавить в контекст и использовать в шаблоне.
         self.filterset = PostFilter(self.request.GET, queryset)
-        # Возвращаем из функции отфильтрованный список товаров
         return self.filterset.qs
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        # Добавляем в контекст объект фильтрации.
         context['filterset'] = self.filterset
         return context
 
@@ -51,7 +43,12 @@ class PostCreate(CreateView):
     template_name = 'post_edit_page.html'
 
     def form_valid(self, form):
-
+        self.object = form.save(commit=False)
+        if 'news' in self.request.path:
+            post_type = 'NE'
+        elif 'articles' in self.request.path:
+            post_type = 'AR'
+        self.object.type = post_type
         return super().form_valid(form)
 
 

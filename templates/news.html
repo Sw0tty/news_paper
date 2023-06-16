@@ -24,7 +24,11 @@ News
 			<td>{{ i.name|censor }}</td>
 			<td>{{ i.datetime_in|date:'d.m.Y' }}</td>
 			<td>{{ i.content|truncatechars:20 }}</td>
-			<td><a href="{{ i.id }}/edit"><input class="edit-button" type="submit" value="Изменить"></a></td>
+			{% if i.type == 'NE' %}
+				<td><a href="/news/{{ i.id }}/edit"><input class="edit-button" type="submit" value="Изменить"></a></td>
+			{% elif i.type == 'AR' %}
+				<td><a href="/articles/{{ i.id }}/edit"><input class="edit-button" type="submit" value="Изменить"></a></td>
+			{% endif %}
 		</tr>
 		{% endfor %}
 	</table>

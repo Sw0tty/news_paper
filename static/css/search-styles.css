@@ -56,3 +56,12 @@ input, select {
 .filter-block {
 
 }
+
+img {
+    height: 150px;
+}
+
+.not-found {
+    width: 100%;
+    padding: 40px;
+}

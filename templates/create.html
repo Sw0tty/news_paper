@@ -1,15 +1,27 @@
 {% extends 'flatpages/default.html' %}
+{% load static %}
 
 {% block title %}
-Delete post
+Create post
 {% endblock title %}
 
 <!-- В контенте на странице мы выводим все товары -->
 {% block content %}
+<link rel="stylesheet" type='text/css' href="{% static 'css/create-styles.css' %}">
 <h1>Выберите тип вашего поста</h1>
 <hr>
-<div>
-    <a href="/news/create"><input type="submit" value="Новость"></a>
-    <a href="/articles/create"><input type="submit" value="Статья"></a>
+<div class="main">
+<a class="img" href="/articles/create">
+    <div class="enter-main">
+        <h1 class="label">Статья</h1>
+        <img src="/static/assets/article.jpg" title="Статья" alt="Статья">
+    </div>
+    </a>
+    <a href="/news/create">
+    <div class="enter-main">
+        <h1 class="label">Новость</h1>
+        <img src="/static/assets/new.jpg" title="Новость" alt="Новость">
+    </div>
+</a>
 </div>
 {% endblock content %}

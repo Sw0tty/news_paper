@@ -43,7 +43,11 @@ Search
 		{% endfor %}
 	</table>
 {% else %}
-	<h2>Новостной портал пуст!</h2>
+<div class="not-found">
+    <img src="/static/assets/not_found.png" title="Ничего не найдено" alt="Ничего не найдено">
+    <h2>Ничего не найдено...</h2>
+</div>
+
 {% endif %}
 
 {% if page_obj.has_previous %}

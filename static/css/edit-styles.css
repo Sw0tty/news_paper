@@ -1,0 +1,72 @@
+.danger-zone {
+    background-color: #FF6969;
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 10px;
+    margin: 20px;
+    display: inline-block;
+}
+
+body {
+  background: url("/static/assets/technology.png") no-repeat fixed;
+  background-size: cover;
+}
+
+.filter-block>hr {
+    margin-top: -10px;
+}
+
+.danger-zone>hr {
+    margin: 9px;
+}
+
+input[type="submit"] {
+    width: 100%;
+    border: 1px solid;
+    border-radius: 20px;
+    height: 30px;
+}
+
+input, textarea, select {
+    width: 100%;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+option, input[type="text"], textarea, select {
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+h2 {
+    text-align: left;
+}
+
+section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    backdrop-filter: blur(6px);
+    margin: 10px;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 20px;
+}
+
+.danger-zone, form {
+    width: 70%;
+}
+
+p {
+    text-align: left;
+    font-weight: bold;
+}
+
+.label {
+    font-size: 1.2em;
+}
