@@ -3,28 +3,42 @@
 {% load custom_filters %}
 
 {% block title %}
-News
+Search
 {% endblock title %}
 
-{% block content %}
-<link rel="stylesheet" type='text/css' href="{% static 'css/news-styles.css' %}">
 
-<h1>Все доступные новости</h1>
+{% block content %}
+<link rel="stylesheet" type='text/css' href="{% static 'css/search-styles.css' %}">
+<section>
+    <form action="" method="get">
+<!--        {{ filterset.form.as_div }}-->
+
+        {% for i in filterset.form %}
+        <div class="filter-block">
+            <p class="label">{{ i.label }}</p>
+            <p class="filter-field">{{ i }}</p>
+        </div>
+        {% endfor %}
+
+        <input class="search-button" type="submit" value="Найти" />
+    </form>
+</section>
+
+
+<h1>Вот что удалось найти</h1>
 <hr>
 {% if news %}
 	<table>
 		<tr class="table-head">
 			<td>Заголовок</td>
-			<td style="width: 15%;">Дата публикации</td>
+			<td class="date-time-collumn">Дата публикации</td>
 			<td>Содержание</td>
-			<td style="width: 10%;">Изменить</td>
 		</tr>
 		{% for i in news %}
 		<tr>
 			<td>{{ i.name|censor }}</td>
 			<td>{{ i.datetime_in|date:'d.m.Y' }}</td>
 			<td>{{ i.content|truncatechars:20 }}</td>
-			<td><a href="{{ i.id }}/edit"><input class="edit-button" type="submit" value="Изменить"></a></td>
 		</tr>
 		{% endfor %}
 	</table>
@@ -47,5 +61,7 @@ News
            <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
        {% endif %}
    {% endif %}
+
+
 
 {% endblock content %}

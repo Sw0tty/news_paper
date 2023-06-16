@@ -6,6 +6,7 @@ h1 {
 
 h3 {
     font-family: fantasy;
+    text-align: left;
 }
 
 td {
@@ -18,11 +19,11 @@ table {
 	font-family: serif;
 }
 
+.edit-button {
+    width: 100%;
+}
+
 .table-head {
     background-color: lightgray;
     height: 50px;
-}
-
-.date-time-collumn {
-	width: 15%;
 }

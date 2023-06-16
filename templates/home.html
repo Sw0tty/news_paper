@@ -8,12 +8,40 @@
 
 {% block content %}
 <link rel="stylesheet" type='text/css' href="{% static 'css/home-styles.css' %}">
-<h1>Добро пожаловать на новостной портал!</h1>
-<hr>
-<p class="pages">На данный момент доступны две страницы:</p>
-<ol>
-    <li>News - все новости</li>
-    <li>Random new - случайная новость</li>
-</ol>
+
+<div class="main-cube">
+    <h1>Добро пожаловать на новостной портал!</h1>
+</div>
+
+<div class="cube">
+    <h1>Доступные страницы</h1>
+    <ol>
+        <li>News - все новости</li>
+        <li>Random new - случайная новость</li>
+        <li>Search - поиск по новостям</li>
+        <li>Create - создание новостей</li>
+        <li>Admin - панель администратора</li>
+    </ol>
+</div>
+
+
+<div class="cube">
+    <h1>Что нового?</h1>
+    <h3>Добавлены страницы</h3>
+    <hr>
+    <ol>
+        <li>Search - поиск по новостям</li>
+        <li>Create - создание новостей</li>
+    </ol>
+    <br>
+    <h3>Внесенные изменения</h3>
+    <hr>
+    <ol>
+        <li>News - добалена кнопка для перехода к редактированию новости</li>
+        <li>Random new - добалена кнопка для перехода к редактированию новости</li>
+        <li>Create - создание новостей</li>
+    </ol>
+</div>
+
 
 {% endblock content %}

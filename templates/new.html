@@ -17,11 +17,13 @@ Fresh new
 			<td>Заголовок</td>
 			<td class="date-time-collumn">Дата публикации</td>
 			<td>Содержание</td>
+			<td style="width: 10%;">Изменить</td>
 		</tr>
 		<tr>
 			<td>{{ new.name|censor }}</td>
 			<td>{{ new.datetime_in|date:'d.m.Y' }}</td>
 			<td>{{ new.content|censor }}</td>
+			<td><a href="{{ new.id }}/edit"><input class="edit-button" type="submit" value="Изменить"></a></td>
 		</tr>
 </table>
 {% endblock content %}

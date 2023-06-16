@@ -4,9 +4,41 @@ h1 {
     font-size: 3em;
 }
 
-.pages, ol {
+body {
+  background: url("/static/assets/news.jpg") no-repeat;
+  background-size: cover;
+}
+
+ol {
     text-align: left;
     font-family: serif;
     font-size: 20px;
+    font-size: 1.2em;
 }
 
+.main-cube {
+    background-color: white;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    padding: 15px;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+    border-left: 1px solid;
+    margin-left: -10%;
+    margin-right: -10%;
+}
+
+.cube {
+  margin-top: 20px;
+  padding: 20px;
+  position: relative;
+  width: 100%;
+  background: transparent;
+  border-radius: 20px;
+  backdrop-filter: blur(4px);
+  display: flow-root;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  backdrop-filter: blur(4px);
+}

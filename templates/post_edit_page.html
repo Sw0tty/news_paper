@@ -1,0 +1,19 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}
+News
+{% endblock title %}
+
+
+{% block content %}
+
+<h1>Создание</h1>
+<hr>
+<form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Save">
+</form>
+<a href="/news/{{ object.id }}/delete"><input type="submit" value="Delete"></a>
+
+{% endblock content %}

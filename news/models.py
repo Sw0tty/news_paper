@@ -3,6 +3,7 @@ from django.db import models
 from news.resources import TYPE_OF_NEW
 from django.contrib.auth.models import User
 from django.db.models import Sum
+from django.urls import reverse
 
 
 class Post(models.Model):
@@ -15,7 +16,7 @@ class Post(models.Model):
     datetime_in = models.DateTimeField(auto_now_add=True)
     content = models.TextField()
     category = models.ManyToManyField('Category', through='PostCategories')
-    author = models.ForeignKey('Author', on_delete=models.CASCADE)
+    author = models.ForeignKey('Author', on_delete=models.CASCADE, related_name='author')
     rating = models.IntegerField(default=0)
 
     def like(self):
@@ -32,9 +33,12 @@ class Post(models.Model):
     def __str__(self):
         return f"{self.name}: {self.preview()}"
 
+    def get_absolute_url(self):
+        return reverse('post_detail', args=[str(self.id)])
+
 
 class Author(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='author')
     user_rating = models.IntegerField(default=0)
 
     def update_rating(self):
@@ -44,9 +48,15 @@ class Author(models.Model):
         self.user_rating = (posts_rating*3) + comments_rating + posts_comments_rating
         self.save()
 
+    def __str__(self):
+        return self.user.username
+
 
 class Category(models.Model):
     category_name = models.CharField(max_length=255, unique=True)
+
+    def __str__(self):
+        return self.category_name.title()
 
 
 class PostCategories(models.Model):
