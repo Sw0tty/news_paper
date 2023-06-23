@@ -1,0 +1,48 @@
+{% extends 'flatpages/default.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block title %}
+For users
+{% endblock title %}
+
+
+{% block content %}
+<link rel="stylesheet" type='text/css' href="{% static 'css/home-styles.css' %}">
+<style>
+    body {
+<!--      background: url("/static/assets/news.jpg") no-repeat fixed;-->
+      background-size: cover;
+    }
+</style>
+
+    <h1>Страница пользователей</h1>
+    <hr>
+
+    {% if is_not_author %}
+    <div class="cube">
+        <p>
+            Спасибо за регистрацию! Теперь вы имеете полное право находится на этой странице. Но и это еще не все!
+            Помимо обычного пользователя можно получить категорию автора.
+        </p>
+    </div>
+
+    <h1>Какие преимущества у автора?</h1>
+    <hr>
+    <div class="cube">
+        <ol>
+            <li>Добавление постов. Вы сможете войти на страницу создания статьи/новости и опубликовать свою личную!</li>
+            <li>Редактирование постов. Помимо создания открывается доступ к редактированию</li>
+        </ol>
+    </div>
+
+        <a class="become-author" href="/for-users/upgrade/">Стать автором</a>
+    {% else %}
+        <h3>
+            Вы являетесь автором!
+        </h3>
+    {% endif %}
+
+
+
+{% endblock content %}

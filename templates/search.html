@@ -11,8 +11,6 @@ Search
 <link rel="stylesheet" type='text/css' href="{% static 'css/search-styles.css' %}">
 <section>
     <form action="" method="get">
-<!--        {{ filterset.form.as_div }}-->
-
         {% for i in filterset.form %}
         <div class="filter-block">
             <p class="label">{{ i.label }}</p>
@@ -65,7 +63,4 @@ Search
            <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
        {% endif %}
    {% endif %}
-
-
-
 {% endblock content %}

@@ -1,9 +1,12 @@
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.shortcuts import render, redirect
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from news.models import Post
-from news.forms import PostForm
+from news.forms import PostForm, CreatingPostForm
 from news.filters import PostFilter
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.models import Group
+from django.contrib.auth.decorators import login_required
 
 
 class PostList(ListView):
@@ -37,8 +40,9 @@ class PostDetail(DetailView):
     context_object_name = 'new'
 
 
-class PostCreate(CreateView):
-    form_class = PostForm
+class PostCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
+    permission_required = ('news.add_post',)
+    form_class = CreatingPostForm
     model = Post
     template_name = 'post_edit_page.html'
 
@@ -52,13 +56,34 @@ class PostCreate(CreateView):
         return super().form_valid(form)
 
 
-class PostUpdate(UpdateView):
+class PostUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
+    permission_required = ('news.change_post',)
+    # redirect_field_name = '/home/'
     form_class = PostForm
     model = Post
     template_name = 'post_edit_page.html'
 
 
-class PostDelete(DeleteView):
+class PostDelete(PermissionRequiredMixin, DeleteView):
+    permission_required = ('news.delete_post',)
     model = Post
     template_name = 'post_delete_page.html'
     success_url = reverse_lazy('posts_list')
+
+
+class ForUsersView(LoginRequiredMixin, TemplateView):
+    template_name = 'for-users.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['is_not_author'] = not self.request.user.groups.filter(name='authors').exists()
+        return context
+
+
+@login_required
+def upgrade_me(request):
+    user = request.user
+    premium_group = Group.objects.get(name='authors')
+    if not request.user.groups.filter(name='authors').exists():
+        premium_group.user_set.add(user)
+    return redirect('/')

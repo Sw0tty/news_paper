@@ -1,0 +1,136 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+h1,
+label,
+.button-alter,
+.alter-method,
+input[type='submit'] {
+    font-family: sans-serif;
+    color: white;
+}
+
+h1 {
+    text-align: center;
+    font-size: 40px;
+    cursor: default;
+    text-shadow: 0px 0px 3px black;
+}
+
+label {
+    font-size: 20px;
+}
+
+section {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+    width: 100%;
+    background: url("/static/assets/authorization.jpg") no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.block {
+  position: relative;
+  width: 500px;
+  background: transparent;
+  border: 1px solid whitesmoke;
+  border-radius: 20px;
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 60 0 60 0;
+}
+
+.block2 {
+    width: 80%;
+}
+
+.socialaccount_providers {
+    display: flex;
+    justify-content: center;
+    margin: 20px;
+}
+
+.GitHub-block {
+    background: url("/static/assets/logo-github.svg") no-repeat;
+}
+
+.Google-block {
+    background: url("/static/assets/logo-google.svg") no-repeat;
+}
+
+.Google-block, .GitHub-block {
+    background-color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid black;
+    background-position: center;
+    background-size: cover;
+    margin: 0px 10px 0px 10px;
+    transition: 0.4s;
+}
+
+.Google-block:hover, .GitHub-block:hover {
+    box-shadow: 0px 0px 8px 3px whitesmoke;
+}
+
+.button-alter, input[type='submit'] {
+    width: 50%;
+    font-size: 20px;
+    border-radius: 20px;
+    text-align: center;
+    padding: 5px;
+    text-decoration: none;
+    border: 2px solid white;
+    margin: 0px 20px 25px 20px;
+    transition: 0.4s;
+}
+
+input[type='submit'] {
+    background-color: initial;
+}
+
+.button-alter:hover, input[type='submit']:hover {
+    background-color: lightslategray;
+}
+
+.buttons-block {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 30px;
+}
+
+input[type='email'], input[type='password'], input[type='text'] {
+    width: 100%;
+    font-size: 20px;
+    margin-bottom: 25px;
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 5px;
+}
+
+input:hover {
+    cursor: pointer;
+}
+
+.alter-method {
+    text-align: center;
+    font-size: 20px;
+    margin: 20px 0px 20px 0px;
+    text-shadow: 0px 0px 3px black;
+    cursor: default;
+}
+
+.button-secondaryAction {
+    color: white;
+    text-align: center;
+}

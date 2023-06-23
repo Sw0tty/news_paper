@@ -18,13 +18,8 @@
         {% load custom_tags %}
         <!-- Responsive navbar-->
         <nav style="z-index: 100; position: fixed; width: 100%;" class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-            <a style="margin-top: -35px;" href="https://github.com/Sw0tty">
-                <div class="logo">
-
-                </div>
-            </a>
+            <a class="logo" href="https://github.com/Sw0tty" title="Разработчик"></a>
            <div class="container">
-
                <a class="navbar-brand" href="/">News Portal</a>
                <button class="navbar-toggler" type="button" data-toggle="collapse"
                        data-target="#navbarResponsive"
@@ -46,19 +41,20 @@
                        <li class="nav-item active">
                            <a class="nav-link" href="/create/">Create</a>
                        </li>
-
-<!--                       <li class="nav-item">-->
-<!--                           <a class="nav-link" href="/about_me/">About Me</a>-->
-<!--                       </li>-->
-<!--                       <li class="nav-item">-->
-<!--                           <a class="nav-link" href="/secret/">Secret page</a>-->
-<!--                       </li>-->
+                       <li class="nav-item">
+                           <a class="nav-link" href="/for-users/">For users</a>
+                       </li>
                        <li class="nav-item">
                            <a class="nav-link" href="/admin/">Admin</a>
                        </li>
                    </ul>
                </div>
            </div>
+            {% if request.user.username %}
+                <label style="color: white; padding-right: 10px;">Добрый день, {{ request.user.username }}! <a href="/accounts/logout">Log out</a></label>
+            {% else %}
+                <label style="color: white; padding-right: 10px;">Вы не вошли в аккаунт, <a href="/accounts/login">Login</a></label>
+            {% endif %}
         </nav>
         <!-- Page content-->
         <div class="container">

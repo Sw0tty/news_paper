@@ -1,0 +1,32 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load static %}
+
+{% block head_title %}{% trans "Sign Out" %}{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/auth.css' %}">
+
+<section>
+  <div class="block">
+    <div class="block2">
+      <h1>{% trans "Выход" %}</h1>
+      <hr>
+
+      <div class="alter-method">{% trans "Вы уверены, что хотите выйти из аккаунта?" %}</div>
+
+      <form method="post" action="{% url 'account_logout' %}">
+        {% csrf_token %}
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+        {% endif %}
+        <div class="buttons-block">
+          <input type="submit" value="{% trans 'Выйти' %}">
+          <a class="button-alter" href="/">Отмена</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

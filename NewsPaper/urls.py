@@ -16,10 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from news.views import ForUsersView, upgrade_me
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('pages/', include('django.contrib.flatpages.urls')),
     path('news/', include('news.urls')),
     path('articles/', include('news.urls')),
+    path('accounts/', include('allauth.urls')),
+    path('for-users/', ForUsersView.as_view()),
+    path('for-users/upgrade/', upgrade_me, name='update'),
 ]
