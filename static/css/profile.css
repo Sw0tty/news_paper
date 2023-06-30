@@ -1,0 +1,90 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: url("/static/assets/house.jpg") no-repeat;
+  background-size: cover;
+}
+
+section {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+    background-color: gray;
+    border: 1px solid;
+    border-radius: 20px;
+}
+
+.main {
+    width: 100%;
+    display: flex;
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 0;
+  margin: 20px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: red;
+    text-align: left;
+}
+
+hr {
+  margin: 0;
+  margin-bottom: 20px;
+  color: inherit;
+  border: 0;
+  border-top: 2px solid;
+  opacity: 0.50;
+}
+
+.info-sec {
+  height: 100%;
+  width: 100%;
+}
+
+.inside-title {
+  height: 20%;
+}
+
+.inside-main-sec {
+  width: 80%;
+  height: 100%;
+}
+
+.profile-picture {
+  width: 20%;
+  background: transparent;
+  align-items: center;
+  margin: 10px;
+  background-color: red;
+  background-position: center;
+  background-size: cover;
+  border-radius: 100%;
+}
+
+.cube {
+  background: transparent;
+  align-items: center;
+  height: 80%;
+}
+
+.cube {
+  border-radius: 20px;
+  border: 1px solid lightgrey;
+  backdrop-filter: blur(4px);
+  justify-content: center;
+  background-color: skyblue;
+  display: flex;
+}

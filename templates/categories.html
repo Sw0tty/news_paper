@@ -1,0 +1,42 @@
+{% extends 'flatpages/default.html' %}
+{% load static %}
+
+{% block title %}
+Create post
+{% endblock title %}
+
+<!-- В контенте на странице мы выводим все товары -->
+{% block content %}
+<link rel="stylesheet" type='text/css' href="{% static 'css/create-styles.css' %}">
+<h1>Все категории портала</h1>
+<hr>
+<div class="main">
+    <table>
+		<tr class="table-head">
+			<th>Категория</th>
+			<th>Подписчики</th>
+			<th style="width: 10%;">Подписаться</th>
+		</tr>
+		<tr>
+			{% for i in category %}
+			<td>{{ i.category_name }}</td>
+			<td>{{ i.id }}</td>
+
+			<td>{% if i.subscribers.all %}
+					{% for j in i.subscribers.all %}
+						{% if forloop.last %}
+							{{ j }}
+						{% else %}
+							{{ j }},
+						{% endif %}
+					{% endfor %}
+				{% else %}
+					Нет подписчиков
+				{% endif %}
+				</td>
+			<td><a href="subscribe/" methods="post"><input class="edit-button" type="submit" value="Подписаться"></a></td>
+		</tr>
+		{% endfor %}
+	</table>
+</div>
+{% endblock content %}

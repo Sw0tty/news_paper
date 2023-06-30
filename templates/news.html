@@ -12,17 +12,32 @@ News
 <h1>Все доступные новости</h1>
 <hr>
 {% if news %}
+<div class="table-cube">
 	<table>
 		<tr class="table-head">
-			<td>Заголовок</td>
-			<td style="width: 15%;">Дата публикации</td>
-			<td>Содержание</td>
-			<td style="width: 10%;">Изменить</td>
+			<th>Заголовок</th>
+			<th style="width: 15%;">Дата публикации</th>
+			<th>Категория</th>
+			<th>Содержание</th>
+			<th style="width: 10%;">Изменить</th>
 		</tr>
 		{% for i in news %}
 		<tr>
 			<td>{{ i.name|censor }}</td>
 			<td>{{ i.datetime_in|date:'d.m.Y' }}</td>
+			<td>{% if i.category.all %}
+					{% for j in i.category.all %}
+				{% if forloop.last %}
+					{{ j }}
+				{% else %}
+				{{ j }},
+				{% endif %}
+				{% endfor %}
+				{% else %}
+					Без категории
+				{% endif %}
+				</td>
+
 			<td>{{ i.content|truncatechars:20 }}</td>
 			{% if i.type == 'NE' %}
 				<td><a href="/news/{{ i.id }}/edit"><input class="edit-button" type="submit" value="Изменить"></a></td>
@@ -32,6 +47,7 @@ News
 		</tr>
 		{% endfor %}
 	</table>
+</div>
 {% else %}
 	<h2>Новостной портал пуст!</h2>
 {% endif %}

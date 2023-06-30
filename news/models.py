@@ -54,6 +54,15 @@ class Author(models.Model):
 
 class Category(models.Model):
     category_name = models.CharField(max_length=255, unique=True)
+    subscribers = models.ManyToManyField(User)
+
+    def subscribe(self, request):
+        self.subscribers.add(request.user)
+        self.save()
+
+    def unsubscribe(self, request):
+        self.subscribers.remove(request.user)
+        self.save()
 
     def __str__(self):
         return self.category_name.title()

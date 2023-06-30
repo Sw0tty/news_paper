@@ -10,13 +10,42 @@ h3 {
 }
 
 td {
-    border: 1px solid;
     padding: 10px;
+    background-color: whitesmoke;
 }
 
 table {
-	width: 100%;
+  border-collapse: collapse;
+  width: 100%;
 	font-family: serif;
+}
+table td, table th {
+  border: 1px solid black;
+}
+table tr:first-child th {
+  border-top: 0;
+}
+table tr:last-child td {
+  border-bottom: 0;
+}
+table tr td:first-child,
+table tr th:first-child {
+  border-left: 0;
+}
+table tr td:last-child,
+table tr th:last-child {
+  border-right: 0;
+}
+
+.table-cube {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: gray;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border: 1px solid black;
 }
 
 .edit-button {
@@ -24,6 +53,5 @@ table {
 }
 
 .table-head {
-    background-color: lightgray;
     height: 50px;
 }

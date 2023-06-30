@@ -45,13 +45,16 @@
                            <a class="nav-link" href="/for-users/">For users</a>
                        </li>
                        <li class="nav-item">
+                           <a class="nav-link" href="/categories/">Categories</a>
+                       </li>
+                       <li class="nav-item">
                            <a class="nav-link" href="/admin/">Admin</a>
                        </li>
                    </ul>
                </div>
            </div>
             {% if request.user.username %}
-                <label style="color: white; padding-right: 10px;">Добрый день, {{ request.user.username }}! <a href="/accounts/logout">Log out</a></label>
+                <label style="color: white; padding-right: 10px;">Добрый день, <a href="/accounts/profile">{{ request.user.username }}</a>! <a href="/accounts/logout">Log out</a></label>
             {% else %}
                 <label style="color: white; padding-right: 10px;">Вы не вошли в аккаунт, <a href="/accounts/login">Login</a></label>
             {% endif %}

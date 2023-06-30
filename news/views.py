@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
-from news.models import Post
+from news.models import Post, Category
 from news.forms import PostForm, CreatingPostForm
 from news.filters import PostFilter
 from django.urls import reverse_lazy
@@ -87,3 +87,17 @@ def upgrade_me(request):
     if not request.user.groups.filter(name='authors').exists():
         premium_group.user_set.add(user)
     return redirect('/')
+
+
+class CategoryView(ListView):
+    model = Category
+    template_name = 'categories.html'
+    context_object_name = 'category'
+
+
+def subscribe(request):
+    user = request.user
+    category = Category.objects.get(id=???)
+    if user not in category.subscribers.all():
+        category.subscribers.add(user)
+    return redirect('/categories/')

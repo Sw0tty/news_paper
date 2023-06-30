@@ -22,24 +22,38 @@ Search
     </form>
 </section>
 
-
 <h1>Вот что удалось найти</h1>
 <hr>
 {% if news %}
+<div class="table-cube">
 	<table>
 		<tr class="table-head">
-			<td>Заголовок</td>
-			<td class="date-time-collumn">Дата публикации</td>
-			<td>Содержание</td>
+			<th>Заголовок</th>
+			<th class="date-time-collumn">Дата публикации</th>
+            <th>Категория</th>
+			<th>Содержание</th>
 		</tr>
 		{% for i in news %}
 		<tr>
 			<td>{{ i.name|censor }}</td>
 			<td>{{ i.datetime_in|date:'d.m.Y' }}</td>
+            <td>{% if i.category.all %}
+					{% for j in i.category.all %}
+				{% if forloop.last %}
+					{{ j }}
+				{% else %}
+				{{ j }},
+				{% endif %}
+				{% endfor %}
+				{% else %}
+					Без категории
+				{% endif %}
+				</td>
 			<td>{{ i.content|truncatechars:20 }}</td>
 		</tr>
 		{% endfor %}
 	</table>
+</div>
 {% else %}
 <div class="not-found">
     <img src="/static/assets/not_found.png" title="Ничего не найдено" alt="Ничего не найдено">

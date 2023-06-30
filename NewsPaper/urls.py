@@ -16,8 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from news.views import ForUsersView, upgrade_me
-
+from news.views import ForUsersView, upgrade_me, CategoryView, subscribe
+from accounts.views import ProfileView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,4 +27,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('for-users/', ForUsersView.as_view()),
     path('for-users/upgrade/', upgrade_me, name='update'),
+    path('accounts/profile/', ProfileView.as_view()),
+    path('categories/', CategoryView.as_view()),
+    path('categories/subscribe/', subscribe, name='subscribe'),
 ]

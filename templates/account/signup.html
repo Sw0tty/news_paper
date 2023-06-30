@@ -13,9 +13,9 @@
     <div class="block2">
       <h1>{% trans "Регистрация" %}</h1>
       <hr>
-      <div class="alter-method">{% blocktrans %}Already have an account? <a style="color: white;" href="{{ login_url }}">Sign in</a>{% endblocktrans %}</div>
-
-      <form class="signup" id="signup_form" method="post" action="?next=/">
+      <div class="alter-method">{% blocktrans %}Already have an account? <a href="{{ login_url }}">Sign in</a>{% endblocktrans %}</div>
+<!--action="?next=/"-->
+      <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
         {% csrf_token %}
         {{ form.as_div }}
         {% if redirect_field_value %}
