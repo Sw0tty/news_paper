@@ -95,9 +95,17 @@ class CategoryView(ListView):
     context_object_name = 'category'
 
 
+@login_required
 def subscribe(request):
     user = request.user
-    category = Category.objects.get(id=???)
-    if user not in category.subscribers.all():
-        category.subscribers.add(user)
+    category = Category.objects.get(id=2)
+    category.subscribers.add(user)
+    return redirect('/categories/')
+
+
+@login_required
+def unsubscribe(request):
+    user = request.user
+    category = Category.objects.get(id=2)
+    category.subscribers.remove(user)
     return redirect('/categories/')

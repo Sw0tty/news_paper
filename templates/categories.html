@@ -34,7 +34,12 @@ Create post
 					Нет подписчиков
 				{% endif %}
 				</td>
-			<td><a href="subscribe/" methods="post"><input class="edit-button" type="submit" value="Подписаться"></a></td>
+			<td>{% if request.user not in i.subscribers.all %}
+					<a href="subscribe/" methods="get"><input class="edit-button" type="submit" value="Подписаться"></a>
+				{% else %}
+					<a href="unsubscribe/" methods="get"><input class="edit-button" type="submit" value="Отписаться"></a>
+				{% endif %}
+			</td>
 		</tr>
 		{% endfor %}
 	</table>
