@@ -98,14 +98,16 @@ class CategoryView(ListView):
 @login_required
 def subscribe(request):
     user = request.user
-    category = Category.objects.get(id=2)
+    category = Category.objects.get(id=int(request.GET['category-id']))
     category.subscribers.add(user)
+
+    print(request.GET)
     return redirect('/categories/')
 
 
 @login_required
 def unsubscribe(request):
     user = request.user
-    category = Category.objects.get(id=2)
+    category = Category.objects.get(id=int(request.GET['category-id']))
     category.subscribers.remove(user)
     return redirect('/categories/')

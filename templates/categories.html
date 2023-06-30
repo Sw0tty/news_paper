@@ -20,7 +20,6 @@ Create post
 		<tr>
 			{% for i in category %}
 			<td>{{ i.category_name }}</td>
-			<td>{{ i.id }}</td>
 
 			<td>{% if i.subscribers.all %}
 					{% for j in i.subscribers.all %}
@@ -35,9 +34,16 @@ Create post
 				{% endif %}
 				</td>
 			<td>{% if request.user not in i.subscribers.all %}
-					<a href="subscribe/" methods="get"><input class="edit-button" type="submit" value="Подписаться"></a>
+				<form action="{% url 'subscribe' %}" method = "get">
+						<input style="display: none" class="edit-button" name="category-id" value="{{ i.id }}">
+						<input class="edit-button" type="submit" value="Подписаться">
+				</form>
 				{% else %}
-					<a href="unsubscribe/" methods="get"><input class="edit-button" type="submit" value="Отписаться"></a>
+				<form action="{% url 'unsubscribe' %}" method = "get">
+						<input style="display: none" class="edit-button" name="category-id" value="{{ i.id }}">
+						<input class="edit-button" type="submit" value="Отписаться">
+				</form>
+<!--					<a href="unsubscribe/" methods="get" name="sub"><input class="edit-button" type="submit" value="Отписаться"></a>-->
 				{% endif %}
 			</td>
 		</tr>
