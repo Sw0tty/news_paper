@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
-from news.models import Post, Category
+from news.models import Post, Category, Author
 from news.forms import PostForm, CreatingPostForm
 from news.filters import PostFilter
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
+from django.core.mail import send_mail
+from datetime import datetime
 
 
 class PostList(ListView):
@@ -86,6 +88,7 @@ def upgrade_me(request):
     premium_group = Group.objects.get(name='authors')
     if not request.user.groups.filter(name='authors').exists():
         premium_group.user_set.add(user)
+        Author.objects.create(user=user)
     return redirect('/')
 
 
@@ -100,8 +103,6 @@ def subscribe(request):
     user = request.user
     category = Category.objects.get(id=int(request.GET['category-id']))
     category.subscribers.add(user)
-
-    print(request.GET)
     return redirect('/categories/')
 
 

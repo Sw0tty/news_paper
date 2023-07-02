@@ -35,15 +35,14 @@ Create post
 				</td>
 			<td>{% if request.user not in i.subscribers.all %}
 				<form action="{% url 'subscribe' %}" method = "get">
-						<input style="display: none" class="edit-button" name="category-id" value="{{ i.id }}">
+						<input style="display: none" name="category-id" value="{{ i.id }}">
 						<input class="edit-button" type="submit" value="Подписаться">
 				</form>
 				{% else %}
 				<form action="{% url 'unsubscribe' %}" method = "get">
-						<input style="display: none" class="edit-button" name="category-id" value="{{ i.id }}">
+						<input style="display: none" name="category-id" value="{{ i.id }}">
 						<input class="edit-button" type="submit" value="Отписаться">
 				</form>
-<!--					<a href="unsubscribe/" methods="get" name="sub"><input class="edit-button" type="submit" value="Отписаться"></a>-->
 				{% endif %}
 			</td>
 		</tr>

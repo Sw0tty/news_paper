@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<style>
+table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100%;
+    width: 100%;
+}
+
+a {
+    color: white;
+}
+
+.main {
+  position: relative;
+  width: 500px;
+  background: transparent;
+  border: 1px solid black;
+  border-radius: 20px;
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.button {
+    width: 50%;
+    font-size: 20px;
+    border-radius: 20px;
+    text-align: center;
+    padding: 5px;
+    text-decoration: none;
+    border: 2px solid white;
+    margin: 0px 20px 25px 20px;
+    font-family: sans-serif;
+    color: white;
+    background-color: lightslategray;
+}
+</style>
+
+<table>
+  <tr class="main">
+      <td>{% if changed %}
+                <h2>Изменения в посте '{{ post.name }}'</h2>
+                    <hr>
+                <p></p>
+            {% elif newsletter %}
+                <h2>Новые посты за эту неделю!</h2>
+                    <hr>
+                <br>
+                  <table style="border: 1px solid black">
+                      {% for i in posts %}
+                      <tr>
+                          <td>{{ i.name }}</td>
+                          <td>{{ i.content|truncatechars:50 }}</td>
+                          <td>
+                          {% if i.type == 'AR' %}
+                            <a class="button" href="http://127.0.0.1:8000/articles/{{ i.id }}">Прочитать пост</a>
+                          {% else %}
+                            <a class="button" href="http://127.0.0.1:8000/news/{{ i.id }}">Прочитать пост</a>
+                          {% endif %}
+                          </td>
+                      </tr>
+                      {% endfor %}
+                  </table>
+            {% else %}
+                <h2>Новый пост из ваших подписок!</h2>
+                    <hr>
+                <br>
+                <p>Название: {{ post.name }}</p>
+                <p>Вот его краткое содержание: <br>{{ post.content|truncatechars:50 }}</p>
+            {% endif %}
+          <br>
+          {% if not newsletter %}
+            <a class="button" href="http://127.0.0.1:8000/{{ post_type }}/{{ post.id }}">Прочитать пост</a>
+          {% endif %}
+      </td>
+  </tr>
+</table>
