@@ -18,7 +18,7 @@ Create post
 	<div class="category-block">
 <!--		style="background: url('/static/assets/{{ i.category_name.lower }}.png') no-repeat; background-size: cover;"-->
 		<a class="category-image" href="/news/search/?category={{ i.id }}"> <!-- image -->
-				<h1 style="opacity: 0.8;" class="label">{{ i.category_name }}</h1>
+				<h1 class="label">{{ i.category_name }}</h1>
 				<img src="/static/assets/{{ i.category_name.lower }}.png" title="{{ i.category_name }}" alt="{{ i.category_name }}">
 		</a>
 		<div class="subscribers"> <!-- subs -->
@@ -53,41 +53,41 @@ Create post
 	{% endfor %}
 
 
-    <table>
-		<tr class="table-head">
-			<th>Категория</th>
-			<th>Подписчики</th>
-			<th style="width: 10%;">Подписаться</th>
-		</tr>
-		<tr>
-			{% for i in category %}
-			<td>{{ i.category_name }}</td>
-			<td>{% if i.subscribers.all %}
-					{% for j in i.subscribers.all %}
-						{% if forloop.last %}
-							{{ j }}
-						{% else %}
-							{{ j }},
-						{% endif %}
-					{% endfor %}
-				{% else %}
-					Нет подписчиков
-				{% endif %}
-				</td>
-			<td>{% if request.user not in i.subscribers.all %}
-				<form action="{% url 'subscribe' %}" method = "get">
-						<input style="display: none" name="category-id" value="{{ i.id }}">
-						<input class="edit-button" type="submit" value="Подписаться">
-				</form>
-				{% else %}
-				<form action="{% url 'unsubscribe' %}" method = "get">
-						<input style="display: none" name="category-id" value="{{ i.id }}">
-						<input class="edit-button" type="submit" value="Отписаться">
-				</form>
-				{% endif %}
-			</td>
-		</tr>
-		{% endfor %}
-	</table>
+<!--    <table>-->
+<!--		<tr class="table-head">-->
+<!--			<th>Категория</th>-->
+<!--			<th>Подписчики</th>-->
+<!--			<th style="width: 10%;">Подписаться</th>-->
+<!--		</tr>-->
+<!--		<tr>-->
+<!--			{% for i in category %}-->
+<!--			<td>{{ i.category_name }}</td>-->
+<!--			<td>{% if i.subscribers.all %}-->
+<!--					{% for j in i.subscribers.all %}-->
+<!--						{% if forloop.last %}-->
+<!--							{{ j }}-->
+<!--						{% else %}-->
+<!--							{{ j }},-->
+<!--						{% endif %}-->
+<!--					{% endfor %}-->
+<!--				{% else %}-->
+<!--					Нет подписчиков-->
+<!--				{% endif %}-->
+<!--				</td>-->
+<!--			<td>{% if request.user not in i.subscribers.all %}-->
+<!--				<form action="{% url 'subscribe' %}" method = "get">-->
+<!--						<input style="display: none" name="category-id" value="{{ i.id }}">-->
+<!--						<input class="edit-button" type="submit" value="Подписаться">-->
+<!--				</form>-->
+<!--				{% else %}-->
+<!--				<form action="{% url 'unsubscribe' %}" method = "get">-->
+<!--						<input style="display: none" name="category-id" value="{{ i.id }}">-->
+<!--						<input class="edit-button" type="submit" value="Отписаться">-->
+<!--				</form>-->
+<!--				{% endif %}-->
+<!--			</td>-->
+<!--		</tr>-->
+<!--		{% endfor %}-->
+<!--	</table>-->
 </div>
 {% endblock content %}
