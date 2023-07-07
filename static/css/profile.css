@@ -38,6 +38,7 @@ h1 {
     font-size: 2.5rem;
     color: red;
     text-align: left;
+    place-self: center;
 }
 
 hr {
@@ -63,8 +64,14 @@ hr {
   height: 100%;
 }
 
+.about {
+    width: 20%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
 .profile-picture {
-  width: 20%;
   background: transparent;
   align-items: center;
   margin: 10px;
@@ -72,6 +79,9 @@ hr {
   background-position: center;
   background-size: cover;
   border-radius: 100%;
+  width: 150px;
+  height: 150px;
+  justify-self: center;
 }
 
 .cube {

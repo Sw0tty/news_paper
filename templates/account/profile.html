@@ -11,19 +11,45 @@
 <!--<script src="{% static 'scripts/simple.js' %}"></script>-->
 <section>
     <div class="main">
-        <div class="profile-picture">
-    <!--        <h3>Picture</h3>-->
+<!--        <table>-->
+<!--            <tr>-->
+<!--                <td></td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td><h1>{{ request.user.username.capitalize }}</h1></td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td><p>Groups: {{ request.user.groups.all }}</p></td>-->
+<!--            </tr>-->
+<!--        </table>-->
+        <div class="about">
+            <div class="profile-picture"></div>
+            <h1>{{ request.user.username.capitalize }}</h1>
+            <hr>
+            <p>Groups: {% if request.user.groups.all %}
+                            {% for group in request.user.groups.all %}
+                                        {% if forloop.last %}
+                                            {{ group.name.capitalize }}
+                                        {% else %}
+                                            {{ group.name.capitalize }},
+                                        {% endif %}
+                                    {% endfor %}
+                        {% else %}
+                            Не состоит в группах
+                        {% endif %}
+            </p>
         </div>
         <div class="inside-main-sec">
-            <div class="info-sec">
-                <div class="inside-title">
-                    <h1>{{ request.user.username.capitalize }}</h1>
-                    <hr>
-                </div>
-                <div class="cube">
-                    <p>About</p>
-                </div>
+            <h1>Карточка пользователя</h1>
+            <hr>
+            <div class="cube">
+                <p>About</p>
             </div>
+            <div class="inside-title">
+
+                <a href="password_change/"><input class="edit-button" type="submit" value="Изменить пароль"></a>
+            </div>
+
         </div>
     </div>
 </section>

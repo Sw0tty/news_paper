@@ -36,3 +36,43 @@ img {
     color: whitesmoke;
     font-size: 5em;
 }
+
+.category-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    border: 1px solid black;
+    border-radius: 20px;
+    margin: 10px 0px 10px 0px;
+    height: 150px;
+    overflow: hidden;
+}
+
+.category-image {
+overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 100%;
+    border-bottom-right-radius: 100px;
+    border-top-right-radius: 100px;
+}
+
+.category-image img {
+    transition: 1s;
+}
+
+.category-image:hover img {
+    transform: scale(1.2); /* Увеличиваем масштаб */
+}
+
+.subscribers {
+    width: 30%;
+}
+
+.sub-button,
+.unsub-button {
+    width: 20%;
+}

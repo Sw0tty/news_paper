@@ -10,7 +10,49 @@ Create post
 <link rel="stylesheet" type='text/css' href="{% static 'css/create-styles.css' %}">
 <h1>Все категории портала</h1>
 <hr>
-<div class="main">
+<div style="width: 100%;">
+
+
+
+	{% for i in category %}
+	<div class="category-block">
+<!--		style="background: url('/static/assets/{{ i.category_name.lower }}.png') no-repeat; background-size: cover;"-->
+		<a class="category-image" href="/news/search/?category={{ i.id }}"> <!-- image -->
+				<h1 style="opacity: 0.8;" class="label">{{ i.category_name }}</h1>
+				<img src="/static/assets/{{ i.category_name.lower }}.png" title="{{ i.category_name }}" alt="{{ i.category_name }}">
+		</a>
+		<div class="subscribers"> <!-- subs -->
+			{% if i.subscribers.all %}
+					{% for j in i.subscribers.all %}
+						{% if forloop.last %}
+							{{ j }}
+						{% else %}
+							{{ j }},
+						{% endif %}
+					{% endfor %}
+				{% else %}
+					Нет подписчиков
+				{% endif %}
+		</div>
+		{% if request.user not in i.subscribers.all %}
+		<div class="sub-button"> <!-- subscribe -->
+			<form action="{% url 'subscribe' %}" method="get">
+						<input style="display: none" name="category-id" value="{{ i.id }}">
+						<input class="edit-button" type="submit" value="Подписаться">
+				</form>
+		</div>
+		{% else %}
+		<div class="unsub-button"> <!-- unsubscribe -->
+			<form action="{% url 'unsubscribe' %}" method="get">
+						<input style="display: none" name="category-id" value="{{ i.id }}">
+						<input class="edit-button" type="submit" value="Отписаться">
+				</form>
+		</div>
+		{% endif %}
+	</div>
+	{% endfor %}
+
+
     <table>
 		<tr class="table-head">
 			<th>Категория</th>
@@ -20,7 +62,6 @@ Create post
 		<tr>
 			{% for i in category %}
 			<td>{{ i.category_name }}</td>
-
 			<td>{% if i.subscribers.all %}
 					{% for j in i.subscribers.all %}
 						{% if forloop.last %}

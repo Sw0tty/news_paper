@@ -64,7 +64,7 @@ ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_EMAIL_VERIFICATION = 'none'
 
 ACCOUNT_FORMS = {'signup': 'news.forms.BasicSignupForm'}
 
@@ -73,6 +73,7 @@ SITE_ID = 1
 LOGIN_URL = '/accounts/login/'
 
 # LOGIN_REDIRECT_URL = '/'
+# LOGOUT_REDIRECT_URL = '/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -167,3 +168,11 @@ EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_SSL = True
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER + '@yandex.ru'
+
+CELERY_BROKER_URL =\
+    'redis://:DVeONZLF6gW1tXSWQAGbz4y7hNOc5MP1@redis-16452.c239.us-east-1-2.ec2.cloud.redislabs.com:16452'
+CELERY_RESULT_BACKEND =\
+    'redis://:DVeONZLF6gW1tXSWQAGbz4y7hNOc5MP1@redis-16452.c239.us-east-1-2.ec2.cloud.redislabs.com:16452'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'

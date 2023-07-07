@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django import forms
 from django.core.exceptions import ValidationError
 from news.models import Post
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, User
 from allauth.account.forms import SignupForm
 
 
@@ -54,3 +54,20 @@ class BasicSignupForm(SignupForm):
         basic_group = Group.objects.get(name='common')
         basic_group.user_set.add(user)
         return user
+
+
+class UserForm(forms.ModelForm):
+
+    # def __init__(self, *args, **kwargs):
+    #     super(UserForm, self).__init__(*args, **kwargs)
+    #     self.fields['username'].label = 'Имя'
+    #     self.fields['password'].label = 'Пароль'
+    #     self.fields['email'].label = 'Почта'
+
+    class Meta:
+        model = User
+
+        fields = ['username',
+                  'password',
+                  'email'
+                  ]

@@ -4,63 +4,69 @@ from django.dispatch import receiver
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives
+from news.tasks import new_post
+from datetime import datetime, timedelta
 
 
 @receiver(m2m_changed, sender=PostCategories)
 def notify_me(sender, instance, **kwargs):
 
-    if instance.type == 'AR':
-        post_type = 'articles'
-    else:
-        post_type = 'news'
+    new_post.apply_async([instance.id], countdown=5)
 
-    html_content = render_to_string(
-        'post_created.html',
-        {
-            'post': instance,
-            'post_type': post_type,
-        }
-    )
-
-    subject = f'New post announced'
-
-    subs = [i.subscribers.all() for i in instance.category.all()]
-    msg = EmailMultiAlternatives(
-        subject=subject,
-        body=instance.content,
-        from_email='@yandex.ru',
-        to=[j.email for i in subs for j in i],
-    )
-    msg.attach_alternative(html_content, "text/html")  # добавляем html
-    msg.send()
+    # if instance.type == 'AR':
+    #     post_type = 'articles'
+    # else:
+    #     post_type = 'news'
+    #
+    # html_content = render_to_string(
+    #     'post_created.html',
+    #     {
+    #         'post': instance,
+    #         'post_type': post_type,
+    #     }
+    # )
+    #
+    # subject = f'New post announced'
+    #
+    # subs = [i.subscribers.all() for i in instance.category.all()]
+    # msg = EmailMultiAlternatives(
+    #     subject=subject,
+    #     body=instance.content,
+    #     from_email='@yandex.ru',
+    #     to=[j.email for i in subs for j in i],
+    # )
+    # msg.attach_alternative(html_content, "text/html")
+    # msg.send()
 
 
 @receiver(post_save, sender=Post)
 def notify_me(sender, instance, created, **kwargs):
 
-    if instance.type == 'AR':
-        post_type = 'articles'
-    else:
-        post_type = 'news'
+    new_post.delay(instance.id)
 
-    changed = True
-    html_content = render_to_string(
-        'post_created.html',
-        {
-            'post': instance,
-            'changed': changed,
-            'post_type': post_type,
-        }
-    )
-
-    subject = f"""Post refreshed"""
-
-    subs = [i.subscribers.all() for i in instance.category.all()]
-    msg = EmailMultiAlternatives(
-        subject=subject,
-        body=instance.content,
-        from_email='@yandex.ru',
-        to=[j.email for i in subs for j in i],
-    )
-    msg.attach_alternative(html_content, "text/html")  # добавляем html
-    msg.send()
+    # if instance.type == 'AR':
+    #     post_type = 'articles'
+    # else:
+    #     post_type = 'news'
+    #
+    # changed = True
+    # html_content = render_to_string(
+    #     'post_created.html',
+    #     {
+    #         'post': instance,
+    #         'changed': changed,
+    #         'post_type': post_type,
+    #     }
+    # )
+    #
+    # subject = f"""Post refreshed"""
+    #
+    # subs = [i.subscribers.all() for i in instance.category.all()]
+    # msg = EmailMultiAlternatives(
+    #     subject=subject,
+    #     body=instance.content,
+    #     from_email='@yandex.ru',
+    #     to=[j.email for i in subs for j in i],
+    # )
+    # msg.attach_alternative(html_content, "text/html")  # добавляем html
+    # msg.send()

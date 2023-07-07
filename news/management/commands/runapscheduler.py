@@ -43,7 +43,7 @@ def my_job():
                 from_email='@yandex.ru',
                 to=[i.email for i in subs],
             )
-            msg.attach_alternative(html_content, "text/html")  # добавляем html
+            msg.attach_alternative(html_content, "text/html")
             msg.send()
 
 

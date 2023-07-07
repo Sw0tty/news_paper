@@ -16,8 +16,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from news.views import ForUsersView, upgrade_me, CategoryView, subscribe, unsubscribe
+from news.views import ForUsersView, upgrade_me, CategoryView, subscribe, unsubscribe, UserDataChanger
 from accounts.views import ProfileView
+from django.contrib.auth.views import PasswordChangeView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -28,6 +29,12 @@ urlpatterns = [
     path('for-users/', ForUsersView.as_view()),
     path('for-users/upgrade/', upgrade_me, name='update'),
     path('accounts/profile/', ProfileView.as_view()),
+    path('accounts/profile/password_change/', PasswordChangeView.as_view(
+        template_name='change-password.html',
+        success_url='/accounts/profile/'
+    ), name='password_change'),
+    # path('accounts/profile/password-change/done/', views.PasswordChangeDoneView.as_view(), name='password_change_done'),
+    # path('accounts/profile/<int:pk>/', UserDataChanger.as_view()),
     path('categories/', CategoryView.as_view()),
     path('categories/subscribe/', subscribe, name='subscribe'),
     path('categories/unsubscribe/', unsubscribe, name='unsubscribe'),

@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
 from news.models import Post, Category, Author
-from news.forms import PostForm, CreatingPostForm
+from news.forms import PostForm, CreatingPostForm, UserForm
 from news.filters import PostFilter
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.contrib.auth.models import Group
+from django.contrib.auth.models import Group, User
 from django.contrib.auth.decorators import login_required
 from django.core.mail import send_mail
 from datetime import datetime
@@ -112,3 +112,10 @@ def unsubscribe(request):
     category = Category.objects.get(id=int(request.GET['category-id']))
     category.subscribers.remove(user)
     return redirect('/categories/')
+
+
+class UserDataChanger(UpdateView):
+    model = User
+    template_name = 'account/profile.html'
+    form_class = UserForm
+
