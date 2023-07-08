@@ -11,8 +11,8 @@ app.autodiscover_tasks()
 
 app.conf.beat_schedule = {
     'every_week_sender': {
-        'task': 'simpleapp.tasks.new_post_sender',
-        'schedule': crontab(minute='0', hour='0', day_of_week='monday'),
+        'task': 'news.tasks.new_posts_last_week_sender',
+        'schedule': crontab(minute='0', hour='8', day_of_week='monday'),
         'args': (),
     },
 }
