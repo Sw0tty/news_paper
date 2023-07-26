@@ -41,4 +41,10 @@ Fresh new
 		</tr>
 	</table>
 </div>
+{% if comment %}
+	<h1>{{ comment.user }}</h1>
+	<h1>{{ comment.comment_text }}</h1>
+	<h1>{{ comment.rating }}</h1>
+	<hr>
+{% endif %}
 {% endblock content %}

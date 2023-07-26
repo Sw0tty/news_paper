@@ -1,4 +1,5 @@
 from celery import shared_task
+from NewsPaper.settings import DEFAULT_FROM_EMAIL
 from news.models import Post
 from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives
@@ -30,7 +31,7 @@ def new_post(instance_id):
     msg = EmailMultiAlternatives(
         subject=subject,
         body=instance.content,
-        from_email='@yandex.ru',
+        from_email=DEFAULT_FROM_EMAIL,
         to=[j.email for i in subs for j in i],
     )
     msg.attach_alternative(html_content, "text/html")
@@ -63,10 +64,10 @@ def refreshed_post(instance_id):
     msg = EmailMultiAlternatives(
         subject=subject,
         body=instance.content,
-        from_email='@yandex.ru',
+        from_email=DEFAULT_FROM_EMAIL,
         to=[j.email for i in subs for j in i],
     )
-    msg.attach_alternative(html_content, "text/html")  # добавляем html
+    msg.attach_alternative(html_content, "text/html")
     msg.send()
 
 
@@ -94,7 +95,7 @@ def new_posts_last_week_sender():
             msg = EmailMultiAlternatives(
                 subject=subject,
                 # body=,
-                from_email='@yandex.ru',
+                from_email=DEFAULT_FROM_EMAIL,
                 to=[i.email for i in subs],
             )
             msg.attach_alternative(html_content, "text/html")

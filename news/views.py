@@ -1,14 +1,13 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, TemplateView
-from news.models import Post, Category, Author
-from news.forms import PostForm, CreatingPostForm, UserForm
-from news.filters import PostFilter
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
-from django.contrib.auth.models import Group, User
 from django.contrib.auth.decorators import login_required
-from django.core.mail import send_mail
-from datetime import datetime
+from django.contrib.auth.models import Group, User
+from django.core.cache import cache
+from news.models import Post, Category, Author, Comment
+from news.forms import PostForm, CreatingPostForm, UserForm
+from news.filters import PostFilter
 
 
 class PostList(ListView):
@@ -40,6 +39,22 @@ class PostDetail(DetailView):
     model = Post
     template_name = 'new.html'
     context_object_name = 'new'
+
+    def get_object(self, *args, **kwargs):
+        obj = cache.get(f'new-{self.kwargs["pk"]}', None)
+
+        if not obj:
+            obj = super().get_object(queryset=self.queryset)
+            cache.set(f'new-{self.kwargs["pk"]}', obj)
+        return obj
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        try:
+            context['comment'] = Comment.objects.get(id=self.kwargs["pk"])
+            return context
+        except Comment.DoesNotExist:
+            return context
 
 
 class PostCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
@@ -118,4 +133,3 @@ class UserDataChanger(UpdateView):
     model = User
     template_name = 'account/profile.html'
     form_class = UserForm
-

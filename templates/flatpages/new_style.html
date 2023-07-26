@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>{% block title %} {% endblock title %}</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="/static/assets/favicon.ico" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        {% load static %}
+        <link href="{% static 'css/new-styles.css' %}" rel="stylesheet" />
+        <link rel="stylesheet" type='text/css' href="{% static 'css/news-styles.css' %}">
+    </head>
+    <body>
+        <!-- Loads -->
+        {% load custom_tags %}
+        <!-- Responsive navbar-->
+        <nav style="z-index: 100; position: fixed; width: 100%;" class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+            <a class="logo" href="https://github.com/Sw0tty" title="Разработчик"></a>
+           <div class="container">
+               <a class="navbar-brand" href="/">News Portal</a>
+               <button class="navbar-toggler" type="button" data-toggle="collapse"
+                       data-target="#navbarResponsive"
+                       aria-controls="navbarResponsive" aria-expanded="false"
+                       aria-label="Toggle navigation">
+                   <span class="navbar-toggler-icon"></span>
+               </button>
+               <div class="collapse navbar-collapse" id="navbarResponsive">
+                   <ul class="navbar-nav ml-auto">
+                       <li class="nav-item">
+                           <a class="nav-link" href="/news/">News</a>
+                       </li>
+                       <li class="nav-item">
+                           <a class="nav-link" href="/news/{% random_new_id %}">Random new</a>
+                       </li>
+                       <li class="nav-item">
+                           <a class="nav-link" href="/news/search/">Search</a>
+                       </li>
+                       <li class="nav-item active">
+                           <a class="nav-link" href="/create/">Create</a>
+                       </li>
+                       <li class="nav-item">
+                           <a class="nav-link" href="/for-users/">For users</a>
+                       </li>
+                       <li class="nav-item">
+                           <a class="nav-link" href="/categories/">Categories</a>
+                       </li>
+                       <li class="nav-item">
+                           <a class="nav-link" href="/admin/">Admin</a>
+                       </li>
+                   </ul>
+               </div>
+           </div>
+            {% if request.user.username %}
+                <label style="color: white; padding-right: 10px;">Добрый день, <a href="/accounts/profile">{{ request.user.username }}</a>! <a href="/accounts/logout">Log out</a></label>
+            {% else %}
+                <label style="color: white; padding-right: 10px;">Вы не вошли в аккаунт, <a href="/accounts/login">Login</a></label>
+            {% endif %}
+        </nav>
+        <!-- Page content-->
+        <div class="content-container">
+           <div style="padding-top: 5%;" class="row">
+               <div class="col-lg-12 text-center">
+                   {% block content %}
+
+                   {% endblock content %}
+               </div>
+           </div>
+        </div>
+    </body>
+</html>

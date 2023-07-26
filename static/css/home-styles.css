@@ -89,3 +89,11 @@ section {
     color: black;
     box-shadow: 0px 0px 26px 6px #ffdf33;
 }
+
+.sticky {
+  position: sticky;
+  top: 0;
+  min-height: 2em;
+  background: lightpink;
+  z-index: 101;
+}

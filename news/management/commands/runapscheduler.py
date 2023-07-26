@@ -1,16 +1,19 @@
 import logging
 
-from django.conf import settings
+from NewsPaper.settings import DEFAULT_FROM_EMAIL
 
-from apscheduler.schedulers.blocking import BlockingScheduler
-from apscheduler.triggers.cron import CronTrigger
+from django.conf import settings
 from django.core.management.base import BaseCommand
 from django_apscheduler.jobstores import DjangoJobStore
 from django_apscheduler.models import DjangoJobExecution
 from django.core.mail import send_mail, EmailMultiAlternatives
+from django.template.loader import render_to_string
+
+from apscheduler.schedulers.blocking import BlockingScheduler
+from apscheduler.triggers.cron import CronTrigger
+
 from news.models import Category, Post
 from datetime import datetime, timedelta
-from django.template.loader import render_to_string
 
 
 logger = logging.getLogger(__name__)
@@ -40,7 +43,7 @@ def my_job():
             msg = EmailMultiAlternatives(
                 subject=subject,
                 # body=,
-                from_email='@yandex.ru',
+                from_email=DEFAULT_FROM_EMAIL,
                 to=[i.email for i in subs],
             )
             msg.attach_alternative(html_content, "text/html")

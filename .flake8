@@ -1,0 +1,6 @@
+[flake8]
+# ignore =
+exclude = .git,__pycache__,./manage.py,./venv,./news/migrations
+
+application-import-name = ./news
+import-order-style = google
