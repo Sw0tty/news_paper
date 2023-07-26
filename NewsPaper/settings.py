@@ -172,10 +172,8 @@ EMAIL_USE_SSL = True
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER + '@yandex.ru'
 
-CELERY_BROKER_URL =\
-    'redis://:DVeONZLF6gW1tXSWQAGbz4y7hNOc5MP1@redis-16452.c239.us-east-1-2.ec2.cloud.redislabs.com:16452'
-CELERY_RESULT_BACKEND =\
-    'redis://:DVeONZLF6gW1tXSWQAGbz4y7hNOc5MP1@redis-16452.c239.us-east-1-2.ec2.cloud.redislabs.com:16452'
+CELERY_BROKER_URL = os.getenv('CELERY_SECRET_URL')
+CELERY_RESULT_BACKEND = os.getenv('CELERY_SECRET_URL')
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
