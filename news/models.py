@@ -30,6 +30,11 @@ class Post(models.Model):
     def preview(self):
         return f"{self.content[:124]}..."
 
+    def post_category(self):
+        if self.category.all():
+            return [i for i in self.category.all()]
+        return "Без категории"
+
     def __str__(self):
         return f"{self.name}: {self.preview()}"
 
