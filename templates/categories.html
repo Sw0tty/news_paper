@@ -22,17 +22,15 @@ Create post
 				<img src="/static/assets/{{ i.category_name.lower }}.png" title="{{ i.category_name }}" alt="{{ i.category_name }}">
 		</a>
 		<div class="subscribers"> <!-- subs -->
-			{% if i.subscribers.all %}
 					{% for j in i.subscribers.all %}
 						{% if forloop.last %}
 							{{ j }}
 						{% else %}
 							{{ j }},
 						{% endif %}
+					{% empty %}
+						Нет подписчиков
 					{% endfor %}
-				{% else %}
-					Нет подписчиков
-				{% endif %}
 		</div>
 		{% if request.user not in i.subscribers.all %}
 		<div class="sub-button"> <!-- subscribe -->
